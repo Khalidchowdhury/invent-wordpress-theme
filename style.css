@@ -10,5 +10,30 @@ Text Domain: invent
 
 
 
+/* Pricing table 2nd table */
+.pricing-card.highlight-pricing {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+.pricing-card.highlight-pricing h3,
+.pricing-card.highlight-pricing p,
+.pricing-card.highlight-pricing h4,
+.pricing-card.highlight-pricing ul li,
+.pricing-card.highlight-pricing .period,
+.pricing-card.highlight-pricing .features-list li i,
+.pricing-card.highlight-pricing .price {
+    color: white;
+}
+
+.pricing .pricing-card .price .period:nth-child(2) {
+  background-color: red;
+}
+
+.pricing-card.highlight-pricing .btn.btn-primary {
+    background: white !important;
+    color: var(--accent-color);
+}
+
 
 

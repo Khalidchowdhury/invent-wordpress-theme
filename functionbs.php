@@ -51,6 +51,14 @@ function invent_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'invent_enqueue_assets');
 
 
+function mytheme_enqueue_styles() {
+    wp_enqueue_style('mytheme-style', get_stylesheet_uri());
+}
+function load_font_awesome_frontend() {
+    wp_enqueue_style( 'font-awesome', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css' );
+}
+add_action( 'wp_enqueue_scripts', 'load_font_awesome_frontend' );
+
 // Enable WebP upload
 function allow_webp_upload($mime_types) {
     $mime_types['webp'] = 'image/webp';

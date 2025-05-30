@@ -1,100 +1,69 @@
+<?php
+/**
+ * Template Name: Team Section
+ */
+$team_section = get_page_by_path('team-section');
+$team_id = $team_section->ID;
+
+$testimonials_section = get_page_by_path('testimonials-section');
+$testimonials_id = $testimonials_section->ID;
+?>
+
+
+
 
     <!-- Team Section -->
     <section id="team" class="team section light-background">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2><?php the_field('team_section_title', $team_id); ?></h2>
+        <p><?php the_field('team_section_description', $team_id); ?></p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row g-5">
 
-          <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
-            <div class="team-card">
-              <div class="team-image">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-m-1.webp" class="img-fluid" alt="">
-                <div class="team-overlay">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.</p>
-                  <div class="team-social">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+          <!--Team Member Loop Start -->
+          <?php if( have_rows('team_slider', $team_id) ): ?>
+            <?php while( have_rows('team_slider', $team_id) ): the_row(); 
+              $image = get_sub_field('team_hero_image');
+              $name = get_sub_field('team_hero_title');
+              $designation = get_sub_field('team_hero_designation');
+              $description = get_sub_field('short_description');
+            ?>
+              <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="team-card">
+                  <div class="team-image">
+                    <?php if ($image): ?>
+                      <img src="<?php echo esc_url($image['url']); ?>" class="img-fluid" alt="<?php echo esc_attr($name); ?>">
+                    <?php endif; ?>
+                    <div class="team-overlay">
+                      <p><?php echo esc_html($description); ?></p>
+                      <div class="team-social">
+                        <?php if( have_rows('team_social_media', $team_id) ): ?>
+                          <?php while( have_rows('team_social_media', $team_id) ): the_row(); 
+                            $icon = get_sub_field('team_social_media_icon', $team_id);
+                            $link = get_sub_field('team_social_media_link', $team_id);
+                          ?>
+                            <a href="<?php echo esc_url($link); ?>" target="_blank">
+                              <i class="<?php echo esc_attr($icon); ?>"></i>
+                            </a>
+                          <?php endwhile; ?>
+                        <?php endif; ?>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="team-content">
+                    <h4><?php echo esc_html($name); ?></h4>
+                    <span class="position"><?php echo esc_html($designation); ?></span>
                   </div>
                 </div>
               </div>
-              <div class="team-content">
-                <h4>Daniel Mitchell</h4>
-                <span class="position">Creative Director</span>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-            <div class="team-card">
-              <div class="team-image">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-f-6.webp" class="img-fluid" alt="">
-                <div class="team-overlay">
-                  <p>Aliquam tincidunt mauris eu risus. Vestibulum auctor dapibus neque. Nunc dignissim risus id metus.</p>
-                  <div class="team-social">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="team-content">
-                <h4>Rebecca Taylor</h4>
-                <span class="position">Lead Developer</span>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-            <div class="team-card">
-              <div class="team-image">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-m-6.webp" class="img-fluid" alt="">
-                <div class="team-overlay">
-                  <p>Cras ornare tristique elit. Integer in dui quis est placerat ornare. Phasellus a lacus a risus.</p>
-                  <div class="team-social">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="team-content">
-                <h4>Marcus Johnson</h4>
-                <span class="position">UI/UX Designer</span>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
-
-          <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
-            <div class="team-card">
-              <div class="team-image">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-f-3.webp" class="img-fluid" alt="">
-                <div class="team-overlay">
-                  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                  <div class="team-social">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="team-content">
-                <h4>Jessica Parker</h4>
-                <span class="position">Marketing Strategist</span>
-              </div>
-            </div>
-          </div><!-- End Team Member -->
+            <?php endwhile; ?>
+          <?php endif; ?>
+          <!--Team Member Loop End -->
 
         </div>
 
@@ -103,14 +72,15 @@
     </section>
     <!-- /Team Section -->
 
+
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+        <h2><?php the_field('testimonials_section_title', $testimonials_id); ?></h2>
+        <p><?php the_field('testimonials_section_description', $testimonials_id); ?></p>
+      </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -139,173 +109,53 @@
               }
             }
           </script>
+
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <p>
-                    <i class="bi bi-quote quote-icon"></i>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-                </div>
-                <div class="testimonial-profile">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="profile-info">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-m-8.webp" alt="Profile Image">
-                    <div>
-                      <h3>Robert Johnson</h3>
-                      <h4>Marketing Director</h4>
+            <!-- Review Section Loop -->
+              <?php if( have_rows('review_box', $testimonials_id) ): ?>
+                <?php while( have_rows('review_box', $testimonials_id) ): the_row(); 
+                  $description = get_sub_field('review_description', $testimonials_id);
+                  $client_image = get_sub_field('clirnt_image', $testimonials_id);
+                  $client_name = get_sub_field('clirnt_name', $testimonials_id);
+                  $client_designation = get_sub_field('clirnt_designation', $testimonials_id);
+                ?>
+                  <div class="swiper-slide">
+                    <div class="testimonial-card">
+                      <div class="testimonial-content">
+                        <p>
+                          <i class="bi bi-quote quote-icon"></i>
+                          <?php echo esc_html($description); ?>
+                        </p>
+                      </div>
+                      <div class="testimonial-profile">
+                        <div class="rating">
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                        </div>
+                        <div class="profile-info">
+                          <?php if ($client_image): ?>
+                            <img src="<?php echo esc_url($client_image['url']); ?>" alt="<?php echo esc_attr($client_name); ?>">
+                          <?php endif; ?>
+                          <div>
+                            <h3><?php echo esc_html($client_name); ?></h3>
+                            <h4><?php echo esc_html($client_designation); ?></h4>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <p>
-                    <i class="bi bi-quote quote-icon"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et maecenas aliquam.
-                  </p>
-                </div>
-                <div class="testimonial-profile">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="profile-info">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-f-3.webp" alt="Profile Image">
-                    <div>
-                      <h3>Lisa Williams</h3>
-                      <h4>Product Manager</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <p>
-                    <i class="bi bi-quote quote-icon"></i>
-                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram.
-                  </p>
-                </div>
-                <div class="testimonial-profile">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="profile-info">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-f-10.webp" alt="Profile Image">
-                    <div>
-                      <h3>Emma Parker</h3>
-                      <h4>UX Designer</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <p>
-                    <i class="bi bi-quote quote-icon"></i>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit.
-                  </p>
-                </div>
-                <div class="testimonial-profile">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="profile-info">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-m-5.webp" alt="Profile Image">
-                    <div>
-                      <h3>David Miller</h3>
-                      <h4>Senior Developer</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <p>
-                    <i class="bi bi-quote quote-icon"></i>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat.
-                  </p>
-                </div>
-                <div class="testimonial-profile">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="profile-info">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-m-2.webp" alt="Profile Image">
-                    <div>
-                      <h3>Michael Davis</h3>
-                      <h4>CEO &amp; Founder</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <p>
-                    <i class="bi bi-quote quote-icon"></i>
-                    Eius ipsam praesentium dolor quaerat inventore rerum odio. Quos laudantium adipisci eius. Accusamus qui iste cupiditate sed temporibus est aspernatur.
-                  </p>
-                </div>
-                <div class="testimonial-profile">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="profile-info">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/person/person-f-7.webp" alt="Profile Image">
-                    <div>
-                      <h3>Sarah Thompson</h3>
-                      <h4>Art Director</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
+                <?php endwhile; ?>
+              <?php endif; ?>
+            <!-- Review Section Loop end-->
           </div>
+
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
 
     </section>
-    <!-- /Testimonials Section -->
+    <!-- Testimonials Section -->
