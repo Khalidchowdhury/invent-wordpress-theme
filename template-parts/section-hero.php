@@ -43,7 +43,12 @@
                         <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
                             <div class="feature-box">
                                 <div class="feature-icon me-sm-4 mb-3 mb-sm-0">
-                                    <i class="<?php the_field('icon'); ?>"></i>
+                                    <?php
+                                        $icon_class = the_sub_field('feture_icon');
+                                        if (!empty($icon_class)) :
+                                    ?>
+                                        <i class="<?php echo esc_attr($icon_class); ?>"></i>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="feature-content">
                                     <h3 class="feature-title"><?php the_sub_field('title'); ?></h3>

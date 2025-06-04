@@ -33,7 +33,12 @@ $cta_id = $cta_section->ID;
               <div class="col-md-6" data-aos="fade-left" data-aos-delay="100">
                 <div class="service-item">
                   <div class="service-icon">
-                    <i class="<?php the_sub_field('services_box_icon', $services_id); ?>"></i>
+                    <?php
+                      $icon_class = the_sub_field('services_box_icon_class', $services_id);
+                      if (!empty($icon_class)) :
+                    ?>
+                      <i class="<?php echo esc_attr($icon_class); ?>"></i>
+                    <?php endif; ?>
                   </div>
                   <div class="service-content">
                     <h3><?php the_sub_field('services_box_title', $services_id); ?></h3>
@@ -65,7 +70,11 @@ $cta_id = $cta_section->ID;
         <div class="row g-5 align-items-center">
           <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
             <div class="cta-image-wrapper">
-              <img src="<?php echo get_template_directory_uri(); ?>/assets/img/cta/cta-4.webp" alt="Call to Action" class="img-fluid rounded-4">
+              <?php 
+              $image = get_field('cta_feature_image', $cta_id); 
+              if ($image): ?>
+                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="img-fluid rounded-4">
+              <?php endif; ?>
               <div class="cta-pattern"></div>
             </div>
           </div>

@@ -2,6 +2,11 @@
 /**
  * Template Name: Portfolio Section
  */
+
+$portfolio_section = get_page_by_path('portfolio-section');
+$portfolio_id = $portfolio_section->ID;
+
+
 ?>
 
 <!-- Portfolio Section start -->
@@ -9,8 +14,8 @@
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2><?php the_field('portfolio_section_title', $portfolio_id); ?></h2>
+        <p><?php the_field('portfolio_section_short_description_', $portfolio_id); ?></p>
     </div>
         
     
@@ -20,135 +25,84 @@
             <!-- Portfolio Filter Tab -->
             <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
                 <ul class="portfolio-filters isotope-filters">
-                <li data-filter="*" class="filter-active">All Work</li>
-                <li data-filter=".filter-web">Web Design</li>
-                <li data-filter=".filter-graphics">Graphics</li>
-                <li data-filter=".filter-motion">Motion</li>
-                <li data-filter=".filter-brand">Branding</li>
+                    <li data-filter="*" class="filter-active">All Work</li>
+                    <?php
+                    $terms = get_terms(array(
+                        'taxonomy' => 'portfolio_category', 
+                        'hide_empty' => true,
+                    ));
+
+                    if (!empty($terms) && !is_wp_error($terms)) :
+                        foreach ($terms as $term) :
+                            echo '<li data-filter=".filter-' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</li>';
+                        endforeach;
+                    endif;
+                    ?>
                 </ul>
             </div>
+            <!-- End Portfolio Filter Tab -->
+
 
             <!-- Portfolio Items  -->
             <div class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
 
-                <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-1.webp" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-actions">
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-1.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
-                        <a href="portfolio-details.html" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="portfolio-content">
-                    <span class="category">Web Design</span>
-                    <h3>Modern Dashboard Interface</h3>
-                    <p>Maecenas faucibus mollis interdum sed posuere consectetur est at lobortis.</p>
-                    </div>
-                </div>
-                </div>
-                <!-- End Portfolio Item -->
+                <!-- Portfolio Item -->
+                <?php
+                $args = array(
+                    'post_type' => 'portfolio',
+                    'posts_per_page' => -1,
+                );
 
-                <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-graphics">
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-10.webp" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-actions">
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-10.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
-                        <a href="portfolio-details.html" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="portfolio-content">
-                    <span class="category">Graphics</span>
-                    <h3>Creative Brand Identity</h3>
-                    <p>Vestibulum id ligula porta felis euismod semper at vulputate.</p>
-                    </div>
-                </div>
-                </div>
-                <!-- End Portfolio Item -->
+                $query = new WP_Query($args);
 
-                <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-motion">
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-7.webp" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-actions">
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-7.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
-                        <a href="portfolio-details.html" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="portfolio-content">
-                    <span class="category">Motion</span>
-                    <h3>Product Animation Reel</h3>
-                    <p>Donec ullamcorper nulla non metus auctor fringilla dapibus.</p>
-                    </div>
-                </div>
-                </div>
-                <!-- End Portfolio Item -->
+                if ($query->have_posts()) :
+                    while ($query->have_posts()) : $query->the_post();
 
-                <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-brand">
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-4.webp" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-actions">
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-4.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-brand"><i class="bi bi-eye"></i></a>
-                        <a href="portfolio-details.html" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="portfolio-content">
-                    <span class="category">Branding</span>
-                    <h3>Luxury Brand Package</h3>
-                    <p>Aenean lacinia bibendum nulla sed consectetur elit.</p>
-                    </div>
-                </div>
-                </div>
-                <!-- End Portfolio Item -->
+                        // Get categories for filter class
+                        $terms = get_the_terms(get_the_ID(), 'portfolio_category');
+                        $term_classes = '';
+                        $term_names = [];
 
-                <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-2.webp" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-actions">
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-2.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
-                        <a href="portfolio-details.html" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="portfolio-content">
-                    <span class="category">Web Design</span>
-                    <h3>E-commerce Platform</h3>
-                    <p>Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    </div>
-                </div>
-                </div>
-                <!-- End Portfolio Item -->
+                        if ($terms && !is_wp_error($terms)) {
+                            foreach ($terms as $term) {
+                                $term_classes .= ' filter-' . $term->slug;
+                                $term_names[] = $term->name;
+                            }
+                        }
 
-                <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-graphics">
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-11.webp" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-actions">
-                        <a href="<?php echo get_template_directory_uri(); ?>/assets/img/portfolio/portfolio-11.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
-                        <a href="portfolio-details.html" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                        // Get featured image URL
+                        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                        ?>
+
+                        <!-- Portfolio Item -->
+                        <div class="col-lg-6 col-md-6 portfolio-item isotope-item<?php echo esc_attr($term_classes); ?>">
+                            <div class="portfolio-card">
+                                <div class="portfolio-image">
+                                    <img src="<?php echo esc_url($image_url); ?>" class="img-fluid" alt="<?php the_title_attribute(); ?>" loading="lazy">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-actions">
+                                            <a href="<?php echo esc_url($image_url); ?>" class="glightbox preview-link" data-gallery="portfolio-gallery-<?php echo esc_attr($term_classes); ?>"><i class="bi bi-eye"></i></a>
+                                            <a href="<?php the_permalink(); ?>" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portfolio-content">
+                                    <span class="category"><?php echo implode(', ', $term_names); ?></span>
+                                    <h3><?php the_title(); ?></h3>
+                                    <p><?php echo wp_trim_words(get_field('short_description'), 20); ?></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                    <div class="portfolio-content">
-                    <span class="category">Graphics</span>
-                    <h3>Digital Art Collection</h3>
-                    <p>Cras mattis consectetur purus sit amet fermentum.</p>
-                    </div>
-                </div>
-                </div>
+                        <!-- End Portfolio Item -->
+
+                    <?php
+                    endwhile;
+                    wp_reset_postdata();
+                else :
+                    echo '<p>No portfolio items found.</p>';
+                endif;
+                ?>
+
                 <!-- End Portfolio Item -->
 
             </div>

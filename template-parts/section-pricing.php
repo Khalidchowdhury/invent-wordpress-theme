@@ -98,7 +98,6 @@ $faq_id = $faq_section->ID;
                     $icon_class = the_field('section_icon', $faq_id);
                 ?>
                 <i class="<?php echo esc_attr($icon_class); ?>"></i>
-                <!-- <i class="bi bi-question-circle"></i> -->
               </div>
               <div class="card-content">
                 <h3><?php the_field('faq_title', $faq_id); ?></h3>

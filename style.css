@@ -12,8 +12,8 @@ Text Domain: invent
 
 /* Pricing table 2nd table */
 .pricing-card.highlight-pricing {
-    background: var(--accent-color);
-    color: var(--contrast-color);
+    background: var(--accent-color) !important;
+    color: var(--contrast-color) !important;
 }
 
 .pricing-card.highlight-pricing h3,
@@ -23,7 +23,7 @@ Text Domain: invent
 .pricing-card.highlight-pricing .period,
 .pricing-card.highlight-pricing .features-list li i,
 .pricing-card.highlight-pricing .price {
-    color: white;
+    color: white !important;
 }
 
 .pricing .pricing-card .price .period:nth-child(2) {
@@ -32,7 +32,7 @@ Text Domain: invent
 
 .pricing-card.highlight-pricing .btn.btn-primary {
     background: white !important;
-    color: var(--accent-color);
+    color: var(--accent-color) !important;
 }
 
 
