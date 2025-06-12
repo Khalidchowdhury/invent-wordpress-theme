@@ -179,6 +179,73 @@ add_action('init', 'register_portfolio_taxonomy');
 
 
 
+add_action('after_import', 'set_footer_default_data');
+function set_footer_default_data() {
+    if ( function_exists('update_field') ) {
+
+        
+        $useful_links = array(
+            array(
+                'useful_link_text' => 'Home',
+                'useful_link_url'  => '#home',
+            ),
+            array(
+                'useful_link_text' => 'About Us',
+                'useful_link_url'  => '#about-us',
+            ),
+            array(
+                'useful_link_text' => 'Portfolio',
+                'useful_link_url'  => '#portfolio',
+            ),
+            array(
+                'useful_link_text' => 'Contact us',
+                'useful_link_url'  => '#contact-us',
+            ),
+        );
+        update_field('useful_links', $useful_links, 'option');
+
+        
+        $our_services = array(
+            array(
+                'service_text' => 'Web Design',
+                'service_url'  => '#web-design',
+            ),
+            array(
+                'service_text' => 'Web Development',
+                'service_url'  => '#web-development',
+            ),
+            array(
+                'service_text' => 'On Page SEO',
+                'service_url'  => '#on-page-seo',
+            ),
+            array(
+                'service_text' => 'Graphic Design',
+                'service_url'  => '#graphic-design',
+            ),
+        );
+        update_field('our_services', $our_services, 'option');
+
+
+        $our_contact = array(
+            'address' => '123 Main Street, Dhaka',
+            'phone'   => '+880123456789',
+            'email'   => 'info@example.com',
+        );
+        update_field('contact_footer', $our_contact, 'option');
+
+    }
+}
+
+
+
+function invent_register_menus() {
+    register_nav_menus([
+        'footer_useful_links' => __( 'Footer Useful Links', 'invent' ),
+        'our_services' => __( 'Our Serviecs', 'invent' ),
+    ]);
+}
+add_action('after_setup_theme', 'invent_register_menus');
+
 
 
 

@@ -90,7 +90,7 @@
                     "custom_icon_set": "",
                     "default_label": "&lt;i class=\"fas\"&gt;&amp;#xf3c5;&lt;\/i&gt; map-marker-alt",
                     "default_value": "fas fa-map-marker-alt",
-                    "save_format": "element",
+                    "save_format": "class",
                     "allow_null": 0,
                     "show_preview": 1,
                     "enqueue_fa": 1,
@@ -164,5 +164,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1748622204
+    "modified": 1749666875
 }

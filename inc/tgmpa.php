@@ -1,5 +1,5 @@
 <?php
-require_once get_template_directory() . '/plugins/class-tgm-plugin-activation.php';
+require_once get_template_directory() . '/inc/class-tgm-plugin-activation.php';
 
 add_action( 'tgmpa_register', 'mytheme_register_required_plugins' );
 function mytheme_register_required_plugins() {
@@ -12,9 +12,9 @@ function mytheme_register_required_plugins() {
             'required'  => true,
         ),
         array(
-            'name'      => 'ACF: Font Awesome',
-            'slug'      => 'acf-font-awesome',
-            'source'    => get_template_directory() . '/plugins/acf-font-awesome.zip',
+            'name'      => 'ACF Font Awesome',
+            'slug'      => 'advanced-custom-fields-font-awesome',
+            'source'    => get_template_directory() . '/plugins/advanced-custom-fields-font-awesome.zip',
             'required'  => true,
         ),
         array(

@@ -44,3 +44,19 @@ function mytheme_ocdi_plugin_page_setup( $default_settings ) {
     ));
 }
 add_filter( 'ocdi/plugin_page_setup', 'mytheme_ocdi_plugin_page_setup' );
+
+
+
+
+function invent_after_import_setup() {
+    $useful_menu = get_term_by('name', 'Footer Useful Links', 'nav_menu');
+    $services_menu = get_term_by('name', 'Our Serviecs', 'nav_menu');
+
+    if ($useful_menu && $services_menu) {
+        set_theme_mod('nav_menu_locations', [
+            'footer_useful_links' => $useful_menu->term_id,
+            'our_services'     => $services_menu->term_id,
+        ]);
+    }
+}
+add_action('ocdi/after_import', 'invent_after_import_setup');

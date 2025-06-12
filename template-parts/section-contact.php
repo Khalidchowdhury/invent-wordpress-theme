@@ -29,10 +29,15 @@ $contact_id = $contact_page->ID;
                   <div class="info-card">
                     <div class="icon-box">
                         <?php
-                            $icon_class = the_sub_field('box_icon', $contact_id);
+                            $icon_class = get_sub_field('box_icon', $contact_id);
+                            $default_icon = 'fa-solid fa-star'; 
+                            
+                            $icon_to_show = $icon_class ? $icon_class : $default_icon;
                         ?>
-                      <i class="<?php echo esc_attr($icon_class); ?>"></i>
+                        <i class="<?php echo esc_attr($icon_to_show); ?>"></i>
                     </div>
+
+
                     <h3><?php the_sub_field('box_title', $contact_id); ?></h3>
                     <p><?php the_sub_field('box_short_description', $contact_id); ?></p>
                   </div>

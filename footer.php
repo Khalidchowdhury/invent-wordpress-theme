@@ -28,43 +28,54 @@
 
       <!-- Useful Links -->
       <div class="col-6 col-lg-2 footer-links">
-          <h6 class="text-uppercase fw-bold">Useful Links</h6>
-          <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
-          <ul class="list-unstyled">
-            <?php if (have_rows('useful_links', 'option')) : ?>
-              <?php while (have_rows('useful_links', 'option')) : the_row(); ?>
-                <?php 
-                  $text = get_sub_field('useful_link_text'); 
-                  $url = get_sub_field('useful_link_url'); 
-                ?>
-                <li>
-                  <a href="<?php echo esc_url($url); ?>" class="text-dark text-decoration-none d-block mb-2">
-                    <?php echo esc_html($text); ?>
-                  </a>
-                </li>
-              <?php endwhile; ?>
-            <?php endif; ?>
-          </ul>
+        <h6 class="text-uppercase fw-bold">Useful Links</h6>
+        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+        <ul class="list-unstyled">
+          <?php
+            wp_nav_menu(array(
+              'theme_location' => 'footer_useful_links',
+              'container' => false,
+              'items_wrap' => '%3$s', 
+              'depth' => 1,
+              'fallback_cb' => false,
+              'walker' => new class extends Walker_Nav_Menu {
+                function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+                  $output .= '<li>';
+                  $output .= '<a href="' . esc_url($item->url) . '" class="text-dark text-decoration-none d-block mb-2">' . esc_html($item->title) . '</a>';
+                }
+                function end_el(&$output, $item, $depth = 0, $args = null) {
+                  $output .= "</li>\n";
+                }
+              }
+            ));
+          ?>
+        </ul>
       </div>
+
 
       <!-- Our Services -->
       <div class="col-6 col-lg-3 footer-links">
           <h6 class="text-uppercase fw-bold">Our Services</h6>
           <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
           <ul class="list-unstyled">
-            <?php if (have_rows('our_services', 'option')) : ?>
-              <?php while (have_rows('our_services', 'option')) : the_row(); ?>
-                <?php 
-                  $text = get_sub_field('service_name'); 
-                  $url = get_sub_field('services_url'); 
-                ?>
-                <li>
-                  <a href="<?php echo esc_url($url); ?>" class="text-dark text-decoration-none d-block mb-2">
-                    <?php echo esc_html($text); ?>
-                  </a>
-                </li>
-              <?php endwhile; ?>
-            <?php endif; ?>
+            <?php
+              wp_nav_menu(array(
+                'theme_location' => 'our_services',
+                'container' => false,
+                'items_wrap' => '%3$s', 
+                'depth' => 1,
+                'fallback_cb' => false,
+                'walker' => new class extends Walker_Nav_Menu {
+                  function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+                    $output .= '<li>';
+                    $output .= '<a href="' . esc_url($item->url) . '" class="text-dark text-decoration-none d-block mb-2">' . esc_html($item->title) . '</a>';
+                  }
+                  function end_el(&$output, $item, $depth = 0, $args = null) {
+                    $output .= "</li>\n";
+                  }
+                }
+              ));
+            ?>
           </ul>
       </div>
 
