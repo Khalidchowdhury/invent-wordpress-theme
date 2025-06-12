@@ -5,10 +5,15 @@
       <!-- About Section (Full Width on mobile) -->
       <div class="col-6 col-lg-4 ffooter-about">
         <div class="footer-contact">
-          <h6 class="text-uppercase fw-bold"><?php the_field('company_name', 'option'); ?></h6>
-            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
-            <p><?php the_field('about_description', 'option'); ?></p>
+          <h6 class="text-uppercase fw-bold">
+            <?php the_field('company_name', 'option'); ?>
+          </h6>   
+
+          <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+
+          <p><?php the_field('about_description', 'option'); ?></p>
         </div>
+
 
         <div class="social-links d-flex mt-4 gap-3">
             <?php if (have_rows('social_links', 'option')) : ?>
@@ -93,11 +98,10 @@
                 <i class="<?php echo esc_attr($icon); ?> mr-3"></i> 
                 <?php echo esc_html($text); ?>
               </p>
+
             <?php endwhile; ?>
           <?php endif; ?>
-
       </div>
-
     </div>
 
     <hr class="text-secondary mt-5">
@@ -116,9 +120,11 @@
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Preloader -->
-    <!-- <div id="preloader"></div> -->
+    <div id="preloader"></div>
 
     <?php wp_footer(); ?>
+
+
 
     <!-- Vendor JS Files -->
     <script src="<?php echo get_template_directory_uri(); ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -130,6 +136,25 @@
     <script src="<?php echo get_template_directory_uri(); ?>/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <!-- Main JS File -->
     <script src="<?php echo get_template_directory_uri(); ?>/assets/js/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+          const header = item.querySelector('.faq-header');
+          header.addEventListener('click', function () {
+            item.classList.toggle('faq-active');
+
+            faqItems.forEach(i => {
+              if (i !== item) {
+                i.classList.remove('faq-active');
+              }
+            });
+          });
+        });
+      });
+    </script>
+
 
 </body>
 </html>

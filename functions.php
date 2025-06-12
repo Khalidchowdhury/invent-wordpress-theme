@@ -4,6 +4,7 @@
 // Basic Theme Setup
 function invent_setup() {
     add_theme_support('title-tag');
+    add_theme_support('site-icon');
     add_theme_support('post-thumbnails');
     add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption']);
     register_nav_menus([
@@ -92,8 +93,7 @@ if (function_exists('acf_add_options_page')) {
         'capability'    => 'edit_posts',
         'redirect'      => false
     ));
-}
-
+    
     // Footer Section as Subpage
     acf_add_options_sub_page(array(
         'page_title'  => 'Footer Section',
@@ -101,6 +101,10 @@ if (function_exists('acf_add_options_page')) {
         'parent_slug' => 'theme-settings',
         'menu_slug'   => 'footer-section'
     ));
+
+}
+
+
 
 
 add_filter('acf/settings/save_json', function($path) {
@@ -241,10 +245,86 @@ function set_footer_default_data() {
 function invent_register_menus() {
     register_nav_menus([
         'footer_useful_links' => __( 'Footer Useful Links', 'invent' ),
-        'our_services' => __( 'Our Serviecs', 'invent' ),
+        'our_services' => __( 'Our Services', 'invent' ),
     ]);
 }
 add_action('after_setup_theme', 'invent_register_menus');
+
+// menu location assign
+function invent_after_demo_import() {
+    $locations = get_theme_mod( 'nav_menu_locations' );
+
+    $useful_links_menu = get_term_by( 'name', 'Useful Section', 'nav_menu' );
+    if ( $useful_links_menu ) {
+        $locations['footer_useful_links'] = $useful_links_menu->term_id;
+    }
+
+    $our_services_menu = get_term_by( 'name', 'Our Serviecs', 'nav_menu' );
+    if ( $our_services_menu ) {
+        $locations['our_services'] = $our_services_menu->term_id;
+    }
+
+    set_theme_mod( 'nav_menu_locations', $locations );
+}
+add_action( 'ocdi/after_import', 'invent_after_demo_import' );
+
+
+
+
+
+
+
+
+
+
+add_action('acf/init', 'invent_set_default_footer_data');
+function invent_set_default_footer_data() {
+    if (!get_field('contact_footer', 'option')) {
+        $default_data = array(
+            array(
+                'contact_icon' => 'fas fa-home me-3',
+                'footer_contact_text' => 'New York, NY 10012, US',
+            ),
+            array(
+                'contact_icon' => 'fas fa-envelope me-3',
+                'footer_contact_text' => 'info@example.com',
+            ),
+            array(
+                'contact_icon' => 'fas fa-phone me-3',
+                'footer_contact_text' => '+01 234 567 88',
+            ),
+        );
+        update_field('contact_footer', $default_data, 'option');
+    }
+}
+
+add_action('acf/init', 'invent_set_default_footer_values');
+
+
+
+function invent_set_default_footer_values() {
+    if (function_exists('update_field')) {
+        // Default Company Name
+        if (!get_field('company_name', 'option')) {
+            update_field('company_name', 'Invent', 'option');
+        }
+
+        // Default About Description
+        if (!get_field('about_description', 'option')) {
+            update_field('about_description', 'Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.', 'option');
+        }
+
+        // Default Footer Text
+        if (!get_field('footer_text', 'option')) {
+            update_field('footer_text', '© 2025 MyWebsite. All Rights Reserved. Designed with ❤️ by Khalid Chowdhury', 'option');
+        }
+    }
+}
+
+
+
+
+
 
 
 

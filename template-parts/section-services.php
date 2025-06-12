@@ -33,12 +33,12 @@ $cta_id = $cta_section->ID;
               <div class="col-md-6" data-aos="fade-left" data-aos-delay="100">
                 <div class="service-item">
                   <div class="service-icon">
-                    <?php
-                      $icon_class = the_sub_field('services_box_icon_class', $services_id);
-                      if (!empty($icon_class)) :
-                    ?>
-                      <i class="<?php echo esc_attr($icon_class); ?>"></i>
-                    <?php endif; ?>
+                      <?php
+                        $icon_class = get_sub_field('services_box_icon_class');
+                        $default_icon = 'fa-solid fa-star'; 
+                        $icon_to_show = $icon_class ? $icon_class : $default_icon;
+                      ?>
+                      <i class="<?php echo esc_attr($icon_to_show); ?>"></i>
                   </div>
                   <div class="service-content">
                     <h3><?php the_sub_field('services_box_title', $services_id); ?></h3>

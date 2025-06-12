@@ -343,7 +343,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "© 2025 MyWebsite. All Rights Reserved\r\n\r\nDesigned with ❤️ by Khalid Chowdhury",
+            "default_value": "© 2025 MyWebsite. All Rights Reserved Designed with ❤️ by Khalid Chowdhury",
             "allow_in_bindings": 0,
             "tabs": "all",
             "toolbar": "full",
@@ -369,5 +369,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1748946904
+    "modified": 1749704141
 }

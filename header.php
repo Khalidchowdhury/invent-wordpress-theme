@@ -7,7 +7,7 @@
   <title><?php bloginfo('name'); ?> <?php wp_title('|'); ?></title>
 
   <!-- Favicons -->
-  <link href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.png" rel="icon">
+  <link href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.jpg" rel="icon">
   <link href="<?php echo get_template_directory_uri(); ?>/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 

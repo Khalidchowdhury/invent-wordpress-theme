@@ -142,11 +142,10 @@ $faq_id = $faq_section->ID;
                     <div class="faq-content">
                       <p><?php echo esc_html($description); ?></p>
                     </div>
-                  </div><!-- End FAQ Item -->
+                  </div>
                   <?php $i++; ?>
                 <?php endwhile; ?>
               <?php endif; ?>
-
 
             </div>
           </div>

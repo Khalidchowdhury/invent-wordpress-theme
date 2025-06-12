@@ -176,7 +176,7 @@
                     "custom_icon_set": "",
                     "default_label": "&lt;i class=\"fas\"&gt;&amp;#xf121;&lt;\/i&gt; code",
                     "default_value": "fas fa-code",
-                    "save_format": "element",
+                    "save_format": "class",
                     "allow_null": 0,
                     "show_preview": 1,
                     "enqueue_fa": 1,
@@ -250,5 +250,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1748949285
+    "modified": 1749703960
 }

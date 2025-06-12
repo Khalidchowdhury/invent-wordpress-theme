@@ -55,12 +55,14 @@ $hero_id = $hero_section->ID;
                             <div class="feature-box">
                                 <div class="feature-icon me-sm-4 mb-3 mb-sm-0">
                                     <?php
-                                        $icon_class = the_sub_field('feture_icon', $hero_id);
-                                        if (!empty($icon_class)) :
+                                        $icon_class = get_sub_field('feture_icon', $hero_id);
+                                        $default_icon = 'fa-solid fa-star';
+
+                                        $icon_to_show = $icon_class ? $icon_class : $default_icon;
                                     ?>
-                                        <i class="<?php echo esc_attr($icon_class); ?>"></i>
-                                    <?php endif; ?>
+                                    <i class="<?php echo esc_attr($icon_to_show); ?>"></i>
                                 </div>
+
                                 <div class="feature-content">
                                     <h3 class="feature-title"><?php the_sub_field('title', $hero_id); ?></h3>
                                     <p class="feature-text"><?php the_sub_field('description', $hero_id); ?></p>
